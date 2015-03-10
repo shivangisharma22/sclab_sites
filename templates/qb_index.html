@@ -1,0 +1,29 @@
+{% extends "qb_base.html" %}
+{% block title %} - Home{% endblock %}
+
+{% block content %}
+    <form action="" method="post" enctype=multipart/form-data>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="well">
+                    <h5>{{ form.gene.label }}</h5>
+                    {{ form.gene(class="form-control", placeholder="POU5F1") }}
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="well">
+                    <h5>{{ form.database.label }}</h5>
+                    {{ form.database(class="form-control") }}
+                </div>
+            </div>
+        </div>
+
+        <div class= "row">
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-warning">Next</button>
+            </div>
+        </div>
+
+        {{ form.hidden_tag() }}
+    </form>
+{% endblock %}
