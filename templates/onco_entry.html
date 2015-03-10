@@ -10,140 +10,45 @@
 {% endblock %}
 
 {% block content %}
-      <div class="alert alert-success">
-            {% with messages = get_flashed_messages() %}
-            {% if messages %}
-            <ul>
-                  {% for message in messages %}
-                        <li>{{ message }} </li>
-                  {% endfor %}
-            </ul>
-            {% endif %}
-            {% endwith %}
-      </div>
+    <div class="alert alert-success">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }} </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+    </div>
 
-      <h3>Please enter the details of collected tumour sample in the form below.</h3>
-      <h3></h3>
-      <form action="" method="post" name="entry">
-            {{ form.hidden_tag() }}
-            <div class="row">
-                  <div class="col-sm-2" align="right"><h5>{{form.code.label}}</h5></div>
-                  <div class="col-sm-3">{{ form.code(class="form-control", placeholder="AIIMS01") }}</div>
-                  <div class="col-sm-1"></div>
-                  <div class="col-sm-2" align="right"><h5>{{form.pathology_report_id.label}}</h5></div>
-                  <div class="col-sm-3">{{ form.pathology_report_id(class="form-control", placeholder="ACS111/223") }}</div>
-            </div>
-            <br>
-            <div class="row">
-                  <div class="col-sm-2" align="right"><h5>{{form.date_of_entry.label}}</h5></div>
-                  <div class="col-sm-3">{{ form.date_of_entry(class="form-control", placeholder="30-12-15") }}</div>
-                  <div class="col-sm-1"></div>
-                  <div class="col-sm-2" align="right"><h5>{{form.place_of_collection.label}}</h5></div>
-                  <div class="col-sm-3">{{ form.place_of_collection(class="form-control", placeholder="AIIMS New Delhi") }}</div>
-            </div>
-            <br>
-            <div class="row">
-                  <div class="col-sm-2" align="right"><h5>{{form.weight.label}}</h5></div>
-                  <div class="col-sm-3">{{ form.weight(class="form-control", placeholder="60") }}</div>
-                  <div class="col-sm-1"></div>
-                  <div class="col-sm-2" align="right"><h5>{{form.age.label}}</h5></div>
-                  <div class="col-sm-3">{{ form.age(class="form-control", placeholder="55") }}</div>
-            </div>
-            <br>
-            <div class="row">
-                  <div class="col-sm-2" align="right"><h5>{{form.tumour_resection_date.label}}</h5></div>
-                  <div class="col-sm-3">{{ form.tumour_resection_date(class="form-control", placeholder="30-12-15") }}</div>
-                  <div class="col-sm-1"></div>
-                  <div class="col-sm-2" align="right"><h5>{{form.tumour_type.label}}</h5></div>
-                  <div class="col-sm-3">{{ form.tumour_type(class="form-control", placeholder="Carcinoma") }}</div>
-            </div>
-            <br>
-            <div class="row">
-                  <div class="col-sm-2" align="right"><h5>{{form.procurement_method.label}}</h5></div>
-                  <div class="col-sm-3">{{ form.procurement_method(class="form-control", placeholder="Mastectomy with clear margin") }}</div>
-                  <div class="col-sm-1"></div>
-                  <div class="col-sm-2" align="right"><h5>{{form.tumour_site.label}}</h5></div>
-                  <div class="col-sm-3">{{ form.tumour_site(class="form-control", placeholder="Axillary lymph node") }}</div>
-            </div>
-            <br>
-            <div class="row">
-                  <div class="col-sm-2" align="right"><h5>{{form.tnm_staging.label}}</h5></div>
-                  <div class="col-sm-3">{{ form.tnm_staging(class="form-control", placeholder="Choose One") }}</div>
-                  <div class="col-sm-1"></div>
-                  <div class="col-sm-2" align="right"><h5>{{form.normal_tissue_proximity.label}}</h5></div>
-                  <div class="col-sm-3">{{ form.normal_tissue_proximity(class="form-control", placeholder="5 cm") }}</div>
-            </div>
-            <br>
-            <div class="row">
-                  <div class="col-sm-2" align="right"><h5>{{form.menopause.label}}</h5></div>
-                  <div class="col-sm-1">{{ form.menopause(class="form-control") }}</div>
-                  <div class="col-sm-1"></div>
-                  <div class="col-sm-2" align="right"><h5>{{form.hiv_status.label}}</h5></div>
-                  <div class="col-sm-1">{{ form.hiv_status(class="form-control") }}</div>
-                  <div class="col-sm-1"></div>
-                  <div class="col-sm-2" align="right"><h5>{{form.normal_sample_collected.label}}</h5></div>
-                  <div class="col-sm-1">{{ form.normal_sample_collected(class="form-control") }}</div>
-            </div>
-            <br>
-            <div class="row">
-                  <div class="col-sm-2" align="right"><h5>{{form.er_status.label}}</h5></div>
-                  <div class="col-sm-1">{{ form.er_status(class="form-control") }}</div>
-                  <div class="col-sm-1"></div>
-                  <div class="col-sm-2" align="right"><h5>{{form.pr_status.label}}</h5></div>
-                  <div class="col-sm-1">{{ form.pr_status(class="form-control") }}</div>
-                  <div class="col-sm-1"></div>
-                  <div class="col-sm-2" align="right"><h5>{{form.her2_status.label}}</h5></div>
-                  <div class="col-sm-1">{{ form.her2_status(class="form-control") }}</div>
-            </div>
-            <br>
-            <div class="row">
-                  <div class="col-sm-2" align="right"><h5>{{form.neo_adjuvant_chemotherapy.label}}</h5></div>
-                  <div class="col-sm-3">{{ form.neo_adjuvant_chemotherapy(class="form-control", placeholder="65 Gy") }}</div>
-                  <div class="col-sm-1"></div>
-                  <div class="col-sm-2" align="right">{{form.neo_adjuvant_radiotherapy.label}}</div>
-                  <div class="col-sm-3">{{ form.neo_adjuvant_radiotherapy(class="form-control", placeholder="70 Gy") }}</div>
-            </div>
-            <br>
-            <div class="row">
-                  <div class="col-sm-2" align="right"><h5>{{form.adjuvant_chemotherapy.label}}</h5></div>
-                  <div class="col-sm-3">{{ form.adjuvant_chemotherapy(class="form-control", placeholder="Methotrexate") }}</div>
-                  <div class="col-sm-1"></div>
-                  <div class="col-sm-2" align="right">{{form.adjuvant_radiotherapy.label}}</div>
-                  <div class="col-sm-3">{{ form.adjuvant_radiotherapy(class="form-control", placeholder="Doxorubicin") }}</div>
-            </div>
-            <br>
-            <div class="row">
-                  <div class="col-sm-2" align="right"><h5>{{form.remission_history.label}}</h5></div>
-                  <div class="col-sm-3">{{ form.remission_history(class="form-control", placeholder="Recurrent tumour") }}</div>
-                  <div class="col-sm-1"></div>
-                  <div class="col-sm-2" align="right">{{form.familial_history.label}}</div>
-                  <div class="col-sm-3">{{ form.familial_history(class="form-control", placeholder="Maternal side with incidences") }}</div>
-            </div>
-            <br>
-            <div class="row">
-                  <div class="col-sm-2" align="right"><h5>{{form.date_of_death.label}}</h5></div>
-                  <div class="col-sm-3">{{ form.date_of_death(class="form-control", placeholder="30-12-2014") }}</div>
-                  <div class="col-sm-1"></div>
-                  <div class="col-sm-2" align="right"><h5>{{form.date_of_last_contact.label}}</h5></div>
-                  <div class="col-sm-3">{{ form.date_of_last_contact(class="form-control", placeholder="30-12-2014") }}</div>
-            </div>
-            <br>
-            <div class="row">
-                  <div class="col-sm-2" align="right"><h5>{{form.diagnosis.label}}</h5></div>
-                  <div class="col-sm-3">{{ form.diagnosis(class="form-control", placeholder="Confimed breast carcinoma") }}</div>
-                  <div class="col-sm-1"></div>
-                  <div class="col-sm-2" align="right"><h5>{{form.targeted_molecular_therapy.label}}</h5></div>
-                  <div class="col-sm-3">{{ form.targeted_molecular_therapy(class="form-control", placeholder="Erlotinib") }}</div>
-            </div>
-            <br><br>
-            <div class="row">
-                  <div class="col-sm-2" align="right">
-                        <button class="btn btn-success btn-block" type="submit">Submit to Database</button>
-                  </div>
-            </div>
-            <br>
+    <h3>Please enter the details of collected tumour sample in the form below.</h3>
+    <h3></h3>
+
+    {% macro render_field(field) %}
+        <div class="row">
+            <div class="col-sm-3" align="right"><h5>{{ field.label }}</h5></div>
+            <div class="col-sm-3">{{ field(class="form-control")}}</div>
         </div>
+        {% if field.errors %}
+            <ul class=errors>
+                {% for error in field.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <br>
+    {% endmacro %}
 
-
-      </form>
+    <form action="" method="post" name="entry">
+        {{ form.hidden_tag() }}
+        {% for field in form if field.widget.input_type != 'hidden' %}
+            {{ render_field(field) }}
+        {% endfor %}
+        <div class="row">
+            <div class="col-sm-2" align="right">
+                <button class="btn btn-success btn-block" type="submit">Submit to Database</button>
+            </div>
+        </div>
+    </form>
 {% endblock %}
