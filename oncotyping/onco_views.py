@@ -33,7 +33,6 @@ def onco_entry():
         for field in form:
             if field.widget.input_type != 'hidden':
                 data.append(field.data)
-                # print field.id,
         data_object = Patient(*data)
         oncotypingdb.session.add(data_object)
         oncotypingdb.session.commit()
