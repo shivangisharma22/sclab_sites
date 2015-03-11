@@ -1,10 +1,15 @@
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for, request
 from flask_login import login_user, logout_user, login_required
+from flask_login import LoginManager
+from flask_sqlalchemy import SQLAlchemy
+from sclab_sites import app
 
-from sclab_sites import app, login_manager
+login_manager = LoginManager()
+login_manager.init_app(app)
+oncotypingdb = SQLAlchemy(app)
+
+from onco_models import User, Patient
 from onco_forms import OncoLoginForm, OncoEntryForm
-from onco_models import User
-
 
 @login_manager.user_loader
 def load_user(id):
@@ -23,7 +28,15 @@ def onco_logout():
 @login_manager.needs_refresh_handler
 def onco_entry():
     form = OncoEntryForm()
-    if form.validate_on_submit():
+    if request.method == 'POST':
+        data = []
+        for field in form:
+            if field.widget.input_type != 'hidden':
+                data.append(field.data)
+                # print field.id,
+        data_object = Patient(*data)
+        oncotypingdb.session.add(data_object)
+        oncotypingdb.session.commit()
         return render_template('onco_success_entry.html')
     return render_template('onco_entry.html', form=form)
 

@@ -7,7 +7,7 @@ sys.path.append(basedir)
 
 import imp
 from migrate.versioning import api
-from sclab_sites import oncotypingdb as db
+from sclab_sites.oncotyping.onco_views import oncotypingdb as db
 from config import SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO
 
 

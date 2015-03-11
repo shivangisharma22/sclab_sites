@@ -1,4 +1,4 @@
-from sclab_sites import oncotypingdb as db
+from sclab_sites.oncotyping.onco_views import oncotypingdb as db
 
 
 class User(db.Model):
@@ -31,8 +31,8 @@ class User(db.Model):
 
 class Patient(db.Model):
 
-    code = db.Column(db.String(200), primary_key=True)
-    pathology_report_id = db.Column(db.String(200))
+    code = db.Column(db.String(200), primary_key=True, unique=True)
+    pathology_report_id = db.Column(db.String(200), unique=True)
     date_of_collection = db.Column(db.DateTime)
     date_of_resection = db.Column(db.DateTime)
     place_of_collection = db.Column(db.String(200))
@@ -60,6 +60,44 @@ class Patient(db.Model):
     date_of_last_contact = db.Column(db.DateTime)
     remission_history = db.Column(db.String(200))
     comments = db.Column(db.String(200))
+
+    def __init__(self, code, pathology_report_id, date_of_collection, date_of_resection,
+                 place_of_collection, age, weight, menopause, hiv_status, familial_history,
+                 normal_sample_collected, normal_tissue_proximity, excision_method, tumour_type,
+                 tumour_site, tnm_staging, er_status, pr_status, her2_status, neo_adjuvant_chemotherapy,
+                 neo_adjuvant_radiotherapy, adjuvant_chemotherapy, adjuvant_radiotherapy,
+                 targeted_molecular_therapy, patient_alive, date_of_death, date_of_last_contact,
+                 remission_history, comments):
+
+        self.code = code
+        self.pathology_report_id = pathology_report_id
+        self.date_of_collection = date_of_collection
+        self.date_of_resection = date_of_resection
+        self.place_of_collection = place_of_collection
+        self.age = age
+        self.weight = weight
+        self.menopause = menopause
+        self.hiv_status = hiv_status
+        self.familial_history = familial_history
+        self.normal_sample_collected = normal_sample_collected
+        self.normal_tissue_proximity = normal_tissue_proximity
+        self.excision_method = excision_method
+        self.tumour_type = tumour_type
+        self.tumour_site = tumour_site
+        self.tnm_staging = tnm_staging
+        self.er_status = er_status
+        self.pr_status = pr_status
+        self.her2_status = her2_status
+        self.neo_adjuvant_chemotherapy = neo_adjuvant_chemotherapy
+        self.neo_adjuvant_radiotherapy = neo_adjuvant_radiotherapy
+        self.adjuvant_chemotherapy = adjuvant_chemotherapy
+        self.adjuvant_radiotherapy = adjuvant_radiotherapy
+        self.targeted_molecular_therapy = targeted_molecular_therapy
+        self.patient_alive = patient_alive
+        self.date_of_death = date_of_death
+        self.date_of_last_contact = date_of_last_contact
+        self.remission_history = remission_history
+        self.comments = comments
 
     def __str__(self):
         return '<Patient code %r>' % self.code
