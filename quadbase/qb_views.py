@@ -95,9 +95,7 @@ def qb_quad_search():
     database = request.args['database']
     promoter_up = request.args['promoter_up']
     promoter_down = request.args['promoter_down']
-    g4_config = request.args['g4_config']
-    print type(g4_config)
-
+    g4_config = ast.literal_eval(request.args['g4_config'])
     gene = UcscGene(gene_name, database)
     if str(g4_config['stem']) in variable_stems:
         variable_stem = True
@@ -115,7 +113,7 @@ def qb_quad_search():
 @app.route("/quadbase/Quad", methods=('GET',))
 def qb_user_quad_search():
     sequence = request.args['sequence']
-    g4_config = request.args['g4_config']
+    g4_config = ast.literal_eval(request.args['g4_config'])
     seq_name = 'User-defined'
     if g4_config['stem'] in variable_stems:
         variable_stem = True
