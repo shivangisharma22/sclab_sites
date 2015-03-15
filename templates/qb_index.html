@@ -2,28 +2,93 @@
 {% block title %} - Home{% endblock %}
 
 {% block content %}
-    <form action="" method="post" enctype=multipart/form-data>
+    <form name="" action="" method="post" enctype=multipart/form-data>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="well">
+                    <h5>{{ user_input_form.userseq.label }}</h5>
+                    {{ user_input_form.userseq(class="input text", rows=5, cols=55) }}<br>
+                    {{ user_input_form.fastafile.label }}{{ user_input_form.fastafile() }}<br>
+                </div>
+            </div>
+        </div>
+        {{ user_input_form.hidden_tag() }}
+
         <div class="row">
             <div class="col-md-3">
                 <div class="well">
-                    <h5>{{ form.gene.label }}</h5>
-                    {{ form.gene(class="form-control", placeholder="POU5F1") }}
+                    <h5>{{ gene_form.gene.label }}</h5>
+                    {{ gene_form.gene(class="form-control", placeholder="POU5F1", id=gene ) }}
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="well">
-                    <h5>{{ form.database.label }}</h5>
-                    {{ form.database(class="form-control") }}
+                    <h5>{{ gene_form.database.label }}</h5>
+                    {{ gene_form.database(class="form-control") }}
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="well">
+                    <h5>{{ gene_form.promoter_up.label }}</h5>
+                    {{ gene_form.promoter_up(class="form-control") }}
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="well">
+                    <h5>{{ gene_form.promoter_down.label }}</h5>
+                    {{ gene_form.promoter_down(class="form-control") }}
+                </div>
+            </div>
+        </div>
+        {{ gene_form.hidden_tag() }}
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="well">
+                    <h5>{{ g4_form.stem.label }}</h5>
+                    {{ g4_form.stem(class="form-control") }}
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="well">
+                    <h5>{{ g4_form.loop_min.label }}</h5>
+                    {{ g4_form.loop_min(class="form-control") }}
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="well">
+                    <h5>{{ g4_form.loop_max.label }}</h5>
+                    {{ g4_form.loop_max(class="form-control") }}
+                </div>
+            </div>
+        </div>
+        <div class= "row">
+            <div class="col-md-3">
+                <div class="well">
+                    <h5>{{ g4_form.strand.label }}</h5>
+                    {{ g4_form.strand(class="form-control") }}
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="well">
+                    <h5>{{ g4_form.overlapping_quads.label }} {{ g4_form.overlapping_quads(class="form-control") }}</h5>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="well">
+                    <h5>{{ g4_form.maximize_quads.label }} {{ g4_form.maximize_quads(class="form-control") }}</h5>
+                </div>
+            </div>
+        </div>
+        {{ g4_form.hidden_tag() }}
 
         <div class= "row">
             <div class="col-md-3">
-                <button type="submit" class="btn btn-warning">Next</button>
+                <button type="submit" class="btn btn-warning">submit</button>
             </div>
         </div>
-
-        {{ form.hidden_tag() }}
     </form>
+
 {% endblock %}
