@@ -2,6 +2,36 @@
 {% block title %} - Home{% endblock %}
 
 {% block content %}
+    <script>
+        $(document).ready(function() {
+            $("#database").change(function() {
+                window.alert($("#database").val());
+                $.ajax({
+                    type: "POST",
+                    url:  "/quadbase/get_genes",
+                    data: JSON.stringify({'db': $("#database").val()}),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        var options, index, select, option;
+                        select = document.getElementById('gene');
+                        select.options.length = 0;
+                        options = data.gene_list;
+                        for (index = 0; index < options.length; ++index) {
+                          option = options[index];
+                          select.options.add(new Option(option, option));
+                        }
+                        window.alert('Options updated');
+                    },
+                    error: function (a,b,c) {
+                        alert( c );
+                    }
+                });
+            });
+        });
+
+    </script>
+
     <form name="" action="" method="post" enctype=multipart/form-data>
         <div class="row">
             <div class="col-md-6">
@@ -17,14 +47,14 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="well">
-                    <h5>{{ gene_form.gene.label }}</h5>
-                    {{ gene_form.gene(class="form-control", placeholder="POU5F1", id=gene ) }}
+                    <h5>{{ gene_form.database.label }}</h5>
+                    {{ gene_form.database(class="form-control") }}
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="well">
-                    <h5>{{ gene_form.database.label }}</h5>
-                    {{ gene_form.database(class="form-control") }}
+                    <h5>{{ gene_form.gene.label }}</h5>
+                    {{ gene_form.gene(class="form-control") }}
                 </div>
             </div>
         </div>

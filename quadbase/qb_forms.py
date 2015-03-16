@@ -5,7 +5,7 @@ from config import quad_stem_options, quad_loop_options, quad_strand_options
 
 
 class GeneForm(Form):
-    gene = wtf.StringField(u'Official Gene symbol')
+    gene = wtf.SelectField(u'Official Gene symbol', choices=[])
     database = wtf.SelectField(u'Choose organism', choices=databases)
     promoter_up = wtf.SelectField(u'Promoter Upstream Offset', choices=promoter_options)
     promoter_down = wtf.SelectField(u'Promoter Downstream Offset', choices=promoter_options)

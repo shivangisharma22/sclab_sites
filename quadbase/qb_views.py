@@ -1,8 +1,8 @@
-from flask import render_template, redirect, url_for, request
+from flask import render_template, redirect, url_for, request, jsonify
 from utilities import pretty_seq_display, get_seq_from_das, shift_cords_to_tss
 from quad_finder import quad_finder
 from qb_forms import GeneForm, G4Config, SelectTx, UserInput
-from config import variable_stems
+from config import variable_stems, gene_list_dict
 from sclab_sites import app
 from operator import itemgetter
 from ucsc_gene import UcscGene
@@ -17,13 +17,11 @@ def qb_index():
     # The third form contains default values for each field and hence doesnt need validation
     g4_form = G4Config(stem=3, loop_min=1, loop_max=7)
     if request.method == "POST":
-        print "Posting Index page"
         g4_config = {'stem': g4_form.stem.data, 'loop_min': int(g4_form.loop_min.data),
                      'loop_max': int(g4_form.loop_max.data), 'strand': g4_form.strand.data,
                      'overlapping_quads': g4_form.overlapping_quads.data,
                      'maximize_quads': g4_form.maximize_quads.data}
         # If User selected a gene name
-        print g4_config
         if gene_form.gene.data:
             # Get information on Transcripts present for the gene
             gene_name = gene_form.gene.data
@@ -58,8 +56,13 @@ def qb_index():
                 fasta_data = fastafile.read()
                 if fasta_data:
                     return redirect(url_for('qb_user_quad_search', sequence=fasta_data, g4_config=g4_config))
-    print "Getting paage"
     return render_template('qb_index.html', gene_form=gene_form, user_input_form=user_input_form, g4_form=g4_form)
+
+
+@app.route("/quadbase/get_genes", methods=['POST'])
+def get_genes():
+    print "In server"
+    return jsonify({'gene_list': gene_list_dict[request.json['db']]})
 
 
 @app.route("/quadbase/SelectTranscript", methods=('GET', 'POST'))

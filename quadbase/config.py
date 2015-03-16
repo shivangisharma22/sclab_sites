@@ -14,3 +14,11 @@ databases = [("hg19", "Homo Sapiens (hg19)"), ("hg18", "Homo Sapiens (hg18)"),
 
 quad_strand_options = [("both", "Both"), ("+", "Plus (+)"), ("-", "Minus (-)")]
 #both option is custom tailored according to quadfinder function
+
+import os
+gene_list_location = os.path.join(os.getcwd(), 'static/quadbase_files')
+gene_list_files = ['hg19', 'mm9']
+gene_list_dict = {}
+for list_file in gene_list_files:
+    with open(os.path.join(gene_list_location, list_file)) as handle:
+        gene_list_dict[list_file] = handle.read().splitlines()
