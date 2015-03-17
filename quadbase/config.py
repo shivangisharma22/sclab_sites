@@ -16,9 +16,22 @@ quad_strand_options = [("both", "Both"), ("+", "Plus (+)"), ("-", "Minus (-)")]
 #both option is custom tailored according to quadfinder function
 
 import os
-gene_list_location = os.path.join(os.getcwd(), 'static/quadbase_files')
+import json
+
+if __name__ == "__main__":
+    gene_list_location = os.path.join(os.path.dirname(os.getcwd()), 'static/quadbase_files')
+else:
+    gene_list_location = os.path.join(os.getcwd(), 'static/quadbase_files')
+
 gene_list_files = ['hg19', 'mm9']
 gene_list_dict = {}
 for list_file in gene_list_files:
     with open(os.path.join(gene_list_location, list_file)) as handle:
         gene_list_dict[list_file] = handle.read().splitlines()
+
+assemblies_json = open(os.path.join(gene_list_location, 'assemblies.json'))
+assemblies_data = json.load(assemblies_json)
+assemblies_json.close()
+
+
+

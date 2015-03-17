@@ -10,8 +10,8 @@ def pretty_seq_display(sequence, quads, tss_quads, up, down, strand, num_chars=6
             break
     quads_with_tss = list(quads)
     tss_quads_with_tss = list(tss_quads)
-    quads_with_tss.insert(i, ["TSS", tss, tss+1, 1, "TSS", ""])
-    tss_quads_with_tss.insert(i, ["TSS", tss, tss+1, 1, "TSS", ""])
+    quads_with_tss.insert(insert_index, ["TSS", tss, tss+1, 1, "TSS", ""])
+    tss_quads_with_tss.insert(insert_index, ["TSS", tss, tss+1, 1, "TSS", ""])
     for i, quad in enumerate(quads_with_tss):
         if quad[0] == "TSS":
             sequence.insert(quad[1]+(i*2), '<mark title="TSS" style="background-color: red;">')

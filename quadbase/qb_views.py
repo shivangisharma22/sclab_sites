@@ -2,7 +2,7 @@ from flask import render_template, redirect, url_for, request, jsonify
 from utilities import pretty_seq_display, get_seq_from_das, shift_cords_to_tss
 from quad_finder import quad_finder
 from qb_forms import GeneForm, G4Config, SelectTx, UserInput
-from config import variable_stems, gene_list_dict
+from config import variable_stems, gene_list_dict, assemblies_data
 from sclab_sites import app
 from operator import itemgetter
 from ucsc_gene import UcscGene
@@ -25,7 +25,7 @@ def qb_index():
         if gene_form.gene.data:
             # Get information on Transcripts present for the gene
             gene_name = gene_form.gene.data
-            database = gene_form.database.data
+            database = gene_form.assemblies.data
             promoter_up = gene_form.promoter_up.data
             promoter_down = gene_form.promoter_down.data
             gene = UcscGene(gene_name, database)
@@ -59,9 +59,13 @@ def qb_index():
     return render_template('qb_index.html', gene_form=gene_form, user_input_form=user_input_form, g4_form=g4_form)
 
 
+@app.route("/quadbase/get_assembly", methods=['POST'])
+def get_assembly():
+    return jsonify({'assemblies': assemblies_data['vertebrates'][request.json['organism']]})
+
+
 @app.route("/quadbase/get_genes", methods=['POST'])
 def get_genes():
-    print "In server"
     return jsonify({'gene_list': gene_list_dict[request.json['db']]})
 
 

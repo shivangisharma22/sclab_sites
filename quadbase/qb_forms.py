@@ -1,12 +1,13 @@
 import wtforms as wtf
 from flask_wtf import Form
-from config import databases, promoter_options
+from config import assemblies_data, promoter_options
 from config import quad_stem_options, quad_loop_options, quad_strand_options
 
 
 class GeneForm(Form):
     gene = wtf.SelectField(u'Official Gene symbol', choices=[])
-    database = wtf.SelectField(u'Choose organism', choices=databases)
+    organisms = wtf.SelectField(u'Choose organism', choices=[(x, x) for x in assemblies_data['vertebrates'].keys()])
+    assemblies = wtf.SelectField(u'Genome assembly', choices=[])
     promoter_up = wtf.SelectField(u'Promoter Upstream Offset', choices=promoter_options)
     promoter_down = wtf.SelectField(u'Promoter Downstream Offset', choices=promoter_options)
 
